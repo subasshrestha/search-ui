@@ -13,7 +13,6 @@ const Options = () => {
     const contents = useSelector((state) => state.search.contents)
     const isLoading = useSelector((state) => state.search.isLoading)
     const error = useSelector((state) => state.search.error)
-    console.log(contents)
 
     if (isLoading) {
         console.log("loading")
@@ -22,20 +21,7 @@ const Options = () => {
     if (error) {
         console.log(error)
     }
-    const options = [
-        { value: 'option1', label: '# Export icon set as icon package' },
-        { value: 'option2', label: '# Export icon set as icon package' },
-        { value: 'option3', label: '# Export icon set as icon package' },
-        { value: 'option4', label: '# Export icon set as icon package' },
-        { value: 'option5', label: '# Export icon set as icon package' },
-        { value: 'option6', label: '# Export icon set as icon package' },
-        { value: 'option7', label: '# Export icon set as icon package' },
-        { value: 'option8', label: '# Export icon set as icon package' },
-        { value: 'option9', label: '# Export icon set as icon package' },
-        { value: 'option62', label: '# Export icon set as icon package' },
-        { value: 'option10', label: '# Export icon set as icon package' },
-        { value: 'option51', label: '# Export icon set as icon package' },
-    ];
+
     const selectRef = useRef(null);
 
     useEffect(() => {
@@ -77,10 +63,10 @@ const Options = () => {
                     name="option"
                     ref={selectRef}
                     onChange={handleSelectChange}
-                    value={options[selectedIndex].value} // Select the option based on the selectedIndex
+                    value={contents?.[selectedIndex]?.title || ""} // Select the option based on the selectedIndex
                 >
-                    {options.map((option, index) => (
-                        <List key={option.value} value={option.value} label={option.label} isSelected={index === selectedIndex} />
+                    {contents.map((option, index) => (
+                        <List key={index} value={option.title} label={option.title} isSelected={index === selectedIndex} />
                     ))}
                 </select>
             </div>
